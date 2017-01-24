@@ -1,0 +1,27 @@
+@import dao.DBUserInfo
+@import forms.UserInfoData
+@import helper._
+@(userForm:Form[UserInfoData])(implicit messages: Messages)
+
+@main("Welcome to Play") {
+
+   <div id="Users">
+    @helper.form(action = routes.HomeController.add){
+        @inputText(userForm("userEmail"), '_label -> "E-mail")
+        @inputText(userForm("firstName"), '_label -> "First Name")
+        @inputText(userForm("lastName"), '_label -> "Last Name")
+        <button type="submit">Add new user</button>
+    }
+        @*<table>*@
+            @*<tr>List of users</tr>*@
+            @* @for(u <- users){*@
+                @*<tr>*@
+                    @*<td>@u.email</td>*@
+                    @*<td>@u.first_name</td>*@
+                    @*<td>@u.last_name</td>*@
+                @*</tr>*@
+            @*}*@
+        @*</table>*@
+   </div>
+
+}
