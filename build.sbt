@@ -11,9 +11,12 @@ libraryDependencies ++= Seq(
   "com.typesafe.slick" %% "slick" % "3.1.1",
   "com.typesafe.play" %% "play-slick" % "2.0.0",
   "com.typesafe.play" %% "play-slick-evolutions" % "2.0.0",
-  "org.postgresql" % "postgresql" % "9.4.1208.jre7"
+  "org.postgresql" % "postgresql" % "9.4.1208.jre7",
+//  Testing
+  "org.scalatestplus.play" %% "scalatestplus-play" % "1.5.1" % "test"
 )
 
 unmanagedResourceDirectories in Test <+=  baseDirectory ( _ /"target/web/public/test" )
 
-resolvers += "scalaz-bintray" at "https://dl.bintray.com/scalaz/releases"
+resolvers ++= Seq("scalaz-bintray" at "https://dl.bintray.com/scalaz/releases"
+)
