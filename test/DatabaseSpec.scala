@@ -1,22 +1,29 @@
-import collection.mutable.Stack
+import dao.UserInfoDaoSlick
 import org.scalatestplus.play._
-/**
-  * Created by peter on 29-1-17.
-  */
-class DatabaseSpec extends PlaySpec{
-  "A Stack" must {
-    "pop values in last in first out order " in {
-      val stack = new Stack[Int]
-      stack.push(1)
-      stack.push(2)
-      stack.pop() mustBe 2
-      stack.pop() mustBe 1
-    }
-    "throw NoSucElement if an empty stack is popped" in {
-      val emptyStack = new Stack[Int]
-      a [NoSuchElementException] mustBe thrownBy{
-        emptyStack.pop()
-      }
+import play.api._
+import play.api.db.slick.DatabaseConfigProvider
+import play.api.inject.guice.GuiceApplicationBuilder
+
+
+
+class DatabaseSpec extends PlaySpec
+  with OneAppPerSuite {
+
+  implicit override lazy val app = new GuiceApplicationBuilder().configure(
+    Map("slick.dbs.default.driver" -> "slick.driver.PostgresDriver$",
+      "slick.dbs.default.db.driver" -> "org.postgresql.Driver",
+      "slick.dbs.default.db.url" -> "jdbc:postgresql://localhost:5432/testsusi",
+      "slick.dbs.default.db.user" -> "postgres",
+      "slick.dbs.default.db.password" -> "root"
+    )
+
+  ).build()
+  val dbConfigprovider: DatabaseConfigProvider = app.injector.instanceOf[DatabaseConfigProvider]
+  "Testing controller" should {
+    "blbalbblaba" in {
+      val controller = new UserInfoDaoSlick(dbConfigprovider)
+      val test = controller.insert("Mooie Email", "Tweede Email", "Derde emaoil")
+
     }
   }
 }

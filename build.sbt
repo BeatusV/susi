@@ -20,3 +20,5 @@ unmanagedResourceDirectories in Test <+=  baseDirectory ( _ /"target/web/public/
 
 resolvers ++= Seq("scalaz-bintray" at "https://dl.bintray.com/scalaz/releases"
 )
+
+javaOptions in Test += "-Dconfig.file=conf/application.test.conf"
