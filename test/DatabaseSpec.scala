@@ -1,8 +1,9 @@
 import dao.UserInfoDaoSlick
 import org.scalatestplus.play._
-import play.api._
 import play.api.db.slick.DatabaseConfigProvider
-import play.api.inject.guice.GuiceApplicationBuilder
+import model.UserInfo
+import play.api.t
+
 
 
 
@@ -12,11 +13,14 @@ class DatabaseSpec extends PlaySpec
 
   implicit override lazy val app = testConfig
   val dbConfigprovider: DatabaseConfigProvider = app.injector.instanceOf[DatabaseConfigProvider]
-  "Testing controller" should {
-    "blbalbblaba" in {
+  "The database" should {
+    "insert data" in {
       val controller = new UserInfoDaoSlick(dbConfigprovider)
-      val test = controller.insert("Msdfasd2453djflsdail", "Tweede Email", "Derde emaoil")
+      val user = new UserInfo("testemail@home.nl", "firstName", "secondName")
+      val testData = controller.insert(user.email, user.firstName, user.lastName)
 
+      val recievedData = controller.all
+      recievedData.result(10.Seconds)
     }
   }
 }

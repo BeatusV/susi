@@ -2,6 +2,7 @@ import play.api.inject.guice.GuiceApplicationBuilder
 
 /**
   * Created by peter on 3-2-17.
+  * See this file as a global configuration file to connect to the test database
   */
 trait TestConfig {
   val testConfig = new GuiceApplicationBuilder().configure(
