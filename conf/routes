@@ -6,6 +6,9 @@
 GET     /                           controllers.HomeController.view
 POST    /person                     controllers.HomeController.add
 
+GET     /loginView                  controllers.LoginController.view
+#POST    /login                      controllers.LoginController.login
+POST    /createUser                 controllers.LoginController.create
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)
 

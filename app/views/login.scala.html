@@ -1,0 +1,13 @@
+@import forms.LoginData
+@import helper._
+@(loginForm: Form[LoginData])(implicit messages: Messages)
+
+@main("Login") {
+    <div>
+    @helper.form(action = routes.LoginController.create) {
+        @inputText(loginForm("loginEmail"), '_label -> "E-mail")
+        @inputPassword(loginForm("loginPassword"), '_label -> "Password")
+        <button type="submit">Login</button>
+    }
+    </div>
+}

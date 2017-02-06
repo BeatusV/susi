@@ -14,6 +14,7 @@ import scala.concurrent.ExecutionContext.Implicits.global
 trait UserInfoDao {
   def all: Future[Seq[DBUserInfo]]
   def insert(email:String, firstName:String, lastName:String): Future[Option[DBUserInfo]]
+  def exists(email:String): Future[Boolean]
 }
 
 class UserInfoDaoSlick @Inject() (protected val dbConfigProvider: DatabaseConfigProvider) extends UserInfoDao with DaoSlickConfig {
@@ -28,6 +29,17 @@ class UserInfoDaoSlick @Inject() (protected val dbConfigProvider: DatabaseConfig
     } yield {
       if (create > 0) Some(newUserInfo)
       else None
+    }
+  }
+
+  override def exists(email: String) = {
+    for {
+      user <- db.run(slickUserInfos.filter(_.email === email).result.headOption)
+    } yield {
+      user match {
+        case None => false
+        case Some(p) => true
+      }
     }
   }
 }

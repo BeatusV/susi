@@ -1,13 +1,12 @@
 package controllers
 
-import play.api._
 import play.api.mvc._
 import javax.inject._
 
 import scala.concurrent.ExecutionContext.Implicits.global
 import play.api.i18n.I18nSupport
 import play.api.i18n.MessagesApi
-import dao.{DBUserInfo, UserInfoDao}
+import dao.UserInfoDao
 import forms.UserForm
 
 import scala.concurrent.Future
